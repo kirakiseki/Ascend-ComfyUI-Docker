@@ -1,0 +1,20 @@
+services:
+  ascend-comfyui:
+    image: ascend-comfyui:latest
+    container_name: ascend-comfyui
+    devices:
+      - /dev/davinci0
+      - /dev/davinci1
+      - /dev/davinci2
+      - /dev/davinci3
+      - /dev/davinci_manager
+      - /dev/devmm_svm
+      - /dev/hisi_hdc
+    restart: "unless-stopped"
+    volumes:
+      - /usr/local/Ascend/driver:/usr/local/Ascend/driver:ro
+      - /usr/local/sbin:/usr/local/sbin:ro
+      - ./data/models:/app/comfyui/models
+    ports:
+      - "18022:8188"
+    shm_size: "5g"
